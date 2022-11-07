@@ -6,7 +6,7 @@ const passport= require('passport');
 const passportLocal= require('passport-local').Strategy;
 const cookieParser= require('cookie-parser');
 const bcrypt= require('bcrypt');
-const expressSession= require('express-session');
+const session= require('express-session');
 
 const app = express();
 
@@ -14,7 +14,12 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({
+    secret: 'secretcode',
+    resave: true,
+    saveUninitialized: true
+}))
 
 app.listen(4000, ()=>{
-    console.log(`le serveur est a l ecoute sur le port 4000`)
+    console.log(`le serveur est a l ecoute sur le port 4000`) 
 })
