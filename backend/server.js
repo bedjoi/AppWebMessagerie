@@ -14,3 +14,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.listen(4000, ()=>{
+    console.log(`le serveur est a l ecoute sur le port 4000`)
+})
