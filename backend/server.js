@@ -14,11 +14,18 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(cars({
+    origin: "http://localhost:300", //adresse de port par defaut de react
+    Credential: true
+}));
+
 app.use(session({
     secret: 'secretcode',
     resave: true,
     saveUninitialized: true
-}))
+}));
+app.use(cookieParser("secretcode"));
 
 app.listen(4000, ()=>{
     console.log(`le serveur est a l ecoute sur le port 4000`) 
