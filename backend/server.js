@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(cars({
-    origin: "http://localhost:300", //adresse de port par defaut de react
+    origin: "http://localhost:3000", //adresse de port par defaut de react
     Credential: true
 }));
 
@@ -26,6 +26,19 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(cookieParser("secretcode"));
+
+//routes
+
+app.get("/user", (req,res)=>{});
+
+app.post("/login", (req,res)=>{
+    console.log(req.body)
+});
+app.post("/register", (req,res)=>{
+    console.log(req.body)
+})
+
+
 
 app.listen(4000, ()=>{
     console.log(`le serveur est a l ecoute sur le port 4000`) 
