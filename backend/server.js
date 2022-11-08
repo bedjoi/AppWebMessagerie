@@ -1,6 +1,6 @@
 const express= require('express');
 const bodyParser= require('body-parser');
-const cars= require('cars');
+const cors = require("cors");
 const mongoose= require('mongoose');
 const passport= require('passport');
 const passportLocal= require('passport-local').Strategy;
@@ -15,10 +15,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(cars({
+app.use(cors ({
     origin: "http://localhost:3000", //adresse de port par defaut de react
     Credential: true
-}));
+}))
 
 app.use(session({
     secret: 'secretcode',
