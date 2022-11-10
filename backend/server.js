@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const express= require('express');
 const bodyParser= require('body-parser');
 const cors = require("cors");
@@ -7,8 +9,18 @@ const passportLocal= require('passport-local').Strategy;
 const cookieParser= require('cookie-parser');
 const bcrypt= require('bcrypt');
 const session= require('express-session');
-
+const User = require("./user");
 const app = express();
+
+mongoose.connect(`mongodb+srv://{process.env.DBUSER}:{process.env.DBPASSWOERD} @cluster0.2qyykqo.mongodb.net/?retryWrites=true&w=majority`,
+{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("Mongoose Is Connected");
+  }
+)
 
 //Middleware
 
