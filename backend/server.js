@@ -27,7 +27,7 @@ mongoose.connect(`mongodb+srv://{process.env.DBUSER}:{process.env.DBPASSWOERD} @
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(cors ({
+app.use(cors({
     origin: "http://localhost:3000", //adresse de port par defaut de react
     Credential: true
 }))
@@ -47,7 +47,20 @@ app.post("/login", (req,res)=>{
     console.log(req.body)
 });
 app.post("/register", (req,res)=>{
-    console.log(req.body)
+    User.findOne({ username: req.body.username }, async (err, doc) => {
+        if (err) throw err;
+        if (doc) res.send("User Already Exists");
+        if (!doc) {
+          const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    
+          const newUser = new User({
+            username: req.body.username,
+            password: hashedPassword,
+          });
+          await newUser.save();
+          res.send("User Created");
+        }
+      });
 })
 
 
